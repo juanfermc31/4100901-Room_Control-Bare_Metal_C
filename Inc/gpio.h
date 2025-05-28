@@ -23,7 +23,6 @@ typedef struct {
     volatile uint32_t AFRH;    // To connect a pin(8-15) to a peripheral like UART, SPI, PWM, etc
 } GPIO_TypeDef;
 
-
 #define GPIOA_BASE (0x48000000U)
 #define GPIOB_BASE (0x48000400U)
 #define GPIOC_BASE (0x48000800U)
@@ -43,20 +42,29 @@ typedef struct {
 #define GPIO_PIN_RESET      0U
 #define GPIO_PIN_SET        1U
 
+// ----------------------------
+// Pines de la aplicación
+// ----------------------------
 
-#define HEARTBEAT_LED_PIN           5     // PA5 para LD2
-#define HEARTBEAT_LED_PORT       GPIOA // Ya conocido por el driver GPIO
+// LD2 (LED Verde en Nucleo-L476RG) usado como Heartbeat
+#define HEARTBEAT_LED_PIN       5     // PA5
+#define HEARTBEAT_LED_PORT      GPIOA
 
-#define EXTERNAL_LED_PWM_PIN        6     // PA6 (TIM3_CH1)
-#define EXTERNAL_LED_PWM_PORT    GPIOA
+// LED externo (PWM) - PA6 (TIM3_CH1)
+#define EXTERNAL_LED_PWM_PIN    6
+#define EXTERNAL_LED_PWM_PORT   GPIOA
 
-#define EXTERNAL_LED_ONOFF_PIN      7     // PA7 para emulacion de estado de puerta
-#define EXTERNAL_LED_ONOFF_PORT  GPIOA
+// LED ON/OFF externo (estado puerta) - PA7
+#define EXTERNAL_LED_ONOFF_PIN  7
+#define EXTERNAL_LED_ONOFF_PORT GPIOA
 
-#define USER_BUTTON_PIN             13    // PC13 para B1
-#define USER_BUTTON_PORT         GPIOC    
+// Botón de usuario (B1) - PC13
+#define USER_BUTTON_PIN         13
+#define USER_BUTTON_PORT        GPIOC
 
-
+// ----------------------------
+// Prototipos de funciones GPIO
+// ----------------------------
 void gpio_setup_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number, uint8_t mode, uint8_t alternate_function);
 void gpio_write_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number, uint8_t pin_state);
 uint8_t gpio_read_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number);
